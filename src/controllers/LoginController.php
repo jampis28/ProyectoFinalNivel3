@@ -16,25 +16,24 @@ class LoginController
     {
         $data = Users::logearse($request);
         if ($data) {
+                switch ($_SESSION["user"]["rol_id"]) {
+                    case 1:
+                        include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/dashboard.php";
+                        break;
+                    case 2:
+                        include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/dashboard.php";
+                        break;
+                    case 3:
+                        include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/dashboard.php";
+                        break;
 
-            switch ($_SESSION["user"]["rol_id"]) {
-                case 1:
-                    include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/dashboard.php";
-                    break;
-                case 2:
-                    include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/dashboard.php";
-                    break;
-                case 3:
-                    include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/dashboard.php";
-                    break;
-
-                default:
-                    # code...
-                    break;
-            }
-        } else {
+                    default:
+                        echo "No se encontro ese rol";
+                        break;
+                }
+        }else {
             echo "Contraseña Incorrecta";
             header("Location: /index.php");
-        }
+       }
     }
 }

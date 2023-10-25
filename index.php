@@ -1,7 +1,9 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/src/controllers/LoginController.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/src/controllers/AdminController.php");
 
 $controller = new LoginController();
+$controller2 = new AdminController();
 
 // ----- URL del navegador -----
 $urlCompleta = $_SERVER["REQUEST_URI"];
@@ -14,6 +16,26 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     switch ($url) {
         case "/index.php":
             $controller->index();
+            break;
+
+        case "/permisos":
+            $controller2->permiso();
+            break;
+
+        case "/maestros":
+            $controller2->maestro();
+            break;
+
+        case "/alumnos":
+            $controller2->alumno();
+            break;
+
+        case "/clases":
+            $controller2->clase();
+            break;
+
+        case "/log_out":
+            $controller2->log_out();
             break;
 
         default:
