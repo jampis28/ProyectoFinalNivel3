@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $controller->login($_POST);
             break;
 
-        // case "/registrado":
-        //     $controller->registrarlo($_POST);
-        //     break;
+            // case "/registrado":
+            //     $controller->registrarlo($_POST);
+            //     break;
 
-        // case "/edit":
-        //     $controller->editar($_POST);
-        //     break;
+            // case "/edit":
+            //     $controller->editar($_POST);
+            //     break;
         default:
             echo "No encontramos la URL";
             break;
