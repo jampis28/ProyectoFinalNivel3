@@ -11,7 +11,6 @@ $urlCompleta = $_SERVER["REQUEST_URI"];
 $urlPartida = explode("?", $urlCompleta);
 // Tomamos la primera posición porque esa es la que representa la acción "/create", "/index.php", etc...
 $url = $urlPartida[0];
-
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     switch ($url) {
         case "/index.php":
@@ -28,6 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
         case "/alumnos":
             $controller2->alumno();
+            break;
+
+        case "/alumnosedit":
+            $controller2->alumnoedit($_GET["id"]);
             break;
 
         case "/clases":
@@ -54,10 +57,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $controller2->registrarlo($_POST);
             break;
 
-            // case "/edit":
-            //     $controller->editar($_POST);
-            //     break;
-        default:
+        case "/maestro":
+            $controller2->registrarlomaestro($_POST);
+            break;
+
+
+        case "/delete":
+            $controller2->delete($_POST["alumno_id"]);
+            break;
+
+        case "/deletemaestro":
+            $controller2->deletemaestro($_POST["alumno_id"]);
+            break;
+
+
+
+            // case "/alumnoedit":
+            //   $datauser = $controller2->editar($_POST);
+            // break;
+            // default:
             echo "No encontramos la URL";
             break;
     }

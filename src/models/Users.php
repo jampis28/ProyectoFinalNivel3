@@ -34,6 +34,15 @@ class Users
         return $res;
     }
 
+    public static function allclase()
+    {
+        $queryString = "SELECT * FROM clases;";
+
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
     public static function register($data)
     {
         try {
@@ -54,6 +63,36 @@ class Users
         
     }
 
+    public static function registermaestro($data)
+    {
+        try {
+            extract($data);
+        if (isset($dni, $email, $contrasena, $nombres, $apellidos, $direccion, $nacimiento) && $dni !== "" && $email !== "" && $contrasena !== "" && $nombres !== "" && $apellidos !== "" && $direccion !== "" && $nacimiento !== "") {
+            $hash = password_hash($contrasena, PASSWORD_DEFAULT);
+            $queryString = "INSERT INTO university.usuarios
+            (dni, nombres, apellidos, email, contrasena, direccion, nacimiento, rol_id)
+            VALUES('$dni', '$nombres', '$apellidos', '$email', '$hash', '$direccion', '$nacimiento', '$rol_id');";
+
+            $res = DB::query($queryString);
+
+            $queryString = "SELECT * FROM usuarios WHERE email = '$email';";
+            $res = DB::query($queryString);
+            $res->rowCount() !== 1 && throw new Exception("No existe el Registro");
+            $data = $res->fetch(PDO::FETCH_ASSOC);
+            $id = $data["id"];
+            $queryString = "INSERT INTO university.clases_maestros
+            (clase_id, maestro_id)
+            VALUES('$clase_id', '$id');";
+
+        }
+        return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+        
+    }
+
     public static function editando($data)
     {
         extract($data);
@@ -65,6 +104,25 @@ class Users
         }
         return $res;
     }
+
+    public static function edit($id)
+    {
+        $queryString = "SELECT * FROM usuarios WHERE id = '$id';";
+
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
+    public static function delete($id)
+    {
+        $res = DB::query("DELETE FROM usuarios WHERE id = $id");
+
+        if ($res) {
+            return true;
+        }
+    }
+
     public static function logout()
     {
         session_start();

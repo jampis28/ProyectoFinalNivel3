@@ -21,6 +21,8 @@ class AdminController
         session_start();
         switch ($_SESSION["user"]["rol_id"]) {
             case 1:
+                $data = $this->all(2);
+                $clases =  $this->allclases();
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/maestros.php";
                 break;
             default:
@@ -46,6 +48,26 @@ class AdminController
                 break;
         }
     }
+
+    public function alumnoedit($id)
+    {
+        session_start();
+        switch ($_SESSION["user"]["rol_id"]) {
+            case 1:
+                $data = $this->all(3);
+                $datauser = $this->editar($id);
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/alumnos/edit.php";
+                break;
+            case 2:
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
+                break;
+
+            default:
+                echo "No se encontro ese ruta";
+                break;
+        }
+    }
+
     public function clase()
     {
         session_start();
@@ -69,17 +91,58 @@ class AdminController
 
 
 
-    //Realizar los CRUD
+    //Realizar los CRUD ALUMNOS
     public function all($rol_id)
     {
         $res = Users::all($rol_id);
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
-       return $data;
-    } 
+        return $data;
+    }
 
     public function registrarlo($request)
     {
         $data = Users::register($request);
-            $this->alumno();
-    } 
+        $this->alumno();
+    }
+
+    public function editar($id_usuario)
+    {
+        $res = Users::edit($id_usuario);
+        $datauser = $res->fetch(PDO::FETCH_ASSOC);
+        return $datauser;
+    }
+
+    public function delete($id)
+    {
+        $deleted = Users::delete($id);
+        header("Location: /alumnos");
+    }
+
+
+    //Realizar los CRUD mAESTRO
+    public function allclases()
+    {
+        $res = Users::allclase();
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function registrarlomaestro($request)
+    {
+        $data = Users::registermaestro($request);
+        $this->maestro();
+    }
+
+    public function editarmaestro($id_usuario)
+    {
+        $res = Users::edit($id_usuario);
+        $datauser = $res->fetch(PDO::FETCH_ASSOC);
+        return $datauser;
+    }
+
+    public function deletemaestro($id)
+    {
+        $deleted = Users::delete($id);
+        header("Location: /maestros");
+    }
 }
