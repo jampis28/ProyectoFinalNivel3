@@ -17,7 +17,7 @@ if (!isset($_SESSION["user"])) {
 
 <body>
     <main class="h-screen flex ">
-        <div class="w-[250px] bg-[#353a40]">
+        <div class="w-[20%] bg-[#353a40]">
             <div class=" flex justify-start items-center  border-b-2 border-[#b1acbd] h-[60px]">
                 <div class="flex ml-5 justify-center items-center rounded-3xl ">
                     <img class="flex object-cover h-[50px] w-[50px] rounded-3xl" src="/src/assets/logo.jpg" alt="Logo">
@@ -89,7 +89,7 @@ if (!isset($_SESSION["user"])) {
         </div>
 
 
-        <div class="bg-[#f5f6fa]">
+        <div class="bg-[#f5f6fa] w-[85%]">
 
             <nav class="bg-[#ffffff] border-2 border-[#a9b0b9]">
                 <div class="mx-auto w-[1150px] h-[60px] px-2 sm:px-6 lg:px-8">
@@ -150,12 +150,117 @@ if (!isset($_SESSION["user"])) {
                     <p class="text-[30px]">Lista de Alumnos</p>
                     <p>Home/Alumnos</p>
                 </div>
-                <div class="w-[600px] h-[70px] flex flex-col justify-center items-start border-2 border-[#a9b0b9] p-2 text-[12px] bg-white ml-6">
+                <div class="w-[1150px] h-[50px] flex justify-between items-center border-2 border-[#a9b0b9] p-2 text-[12px] bg-white ml-6">
                     <p>Informacion de Alumnos</p>
+                    <button id="open-modal" class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-8">Agregar Alumno</button>
                 </div>
             </div>
-        </div>
 
+            <!------------------------------------ MODAL-------------------------->
+
+            <div class="bg-gray-100  flex items-center justify-center">
+
+                <!-- Modal oculto -->
+
+
+                <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+                    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+                    <div class="modal-container bg-white w-[400px] h-[600px] md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                        <!-- Contenido del modal -->
+                        <div class="modal-content py-4 text-left ">
+                            <div class="flex justify-between items-center pb-3 mb-3  border-b border-[#a9b0b9]">
+                                <p class="text-2xl font-bold mx-4">Agregar Alumno</p>
+                            </div>
+                            <form class="flex flex-col gap-2" action="/alumno" method="post">
+                                <div class="flex flex-col justify-center items-start pl-4">
+                                    <label for="">DNI</label>
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[33px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa la matricula" name="dni">
+                                </div>
+                                <div class="flex flex-col justify-center items-start pl-4">
+                                    <label for="">Correo Electronico</label>
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[33px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa email" name="email">
+                                </div>
+                                <div class="flex flex-col justify-center items-start pl-4">
+                                    <label for="">Contraseña</label>
+                                    <input type="password" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[33px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa Password" name="contrasena">
+                                </div>
+
+                                <div class="flex flex-col justify-center items-start pl-4">
+                                    <label for="">Nombre(s)</label>
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[33px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa nombre(s)" name="nombres">
+                                </div>
+                                <div class="flex flex-col justify-center items-start pl-4">
+                                    <label for="">Apellido(s)</label>
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[33px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa apellido(s)" name="apellidos">
+                                </div>
+                                <div class="flex flex-col justify-center items-start pl-4">
+                                    <label for="">Dirección</label>
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[33px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa direccion" name="direccion">
+                                </div>
+                                <div class="flex flex-col justify-center items-start pl-4">
+                                    <label for="">Fecha de nacimiento</label>
+                                    <input type="date" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[33px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="nacimiento">
+                                    <input type="hidden" name="rol_id" value="3">
+                                </div>
+                                <div class="flex justify-end items-center pl-4 mt-[8px]">
+                                    <button type="submit" class="w-[150px] text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Guardar Cambios</button>
+                                </div>
+                            </form>
+                            <div class="absolute top-[539px] ml-6">
+                                <button id="close-modal" class="w-[150px] text-white bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 close-modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                const openModalButton = document.getElementById("open-modal");
+                const modal = document.getElementById("modal");
+                const closeModalButton = document.getElementById("close-modal");
+
+                openModalButton.addEventListener("click", () => {
+                    modal.classList.remove("hidden");
+                });
+                closeModalButton.addEventListener("click", () => {
+                    modal.classList.add("hidden");
+                });
+            </script>
+            <div class="ml-6">
+                <table class="table-fixed selection:border-collapse border border-slate-400 w-[1100px]">
+            
+                    <th class="border border-slate-300 text-center w-11">#</th>
+                    <th class="border border-slate-300 text-center">DNI</th>
+                    <th class="border border-slate-300 text-center">NOMBRE</th>
+                    <th class="border border-slate-300 text-center">APELLIDO</th>
+                    <th class="border border-slate-300 text-center">CORREO</th>
+                    <th class="border border-slate-300 text-center">DIRECCION</th>
+                    <th class="border border-slate-300 text-center">FECHA DE NACIMIENTO</th>
+                    <th class="border border-slate-300 text-center">ACCIONES</th>
+                    <tbody>
+                        <?php
+                        foreach ($data as $alumnos) {
+                        ?>
+                            <!-- Use a white background for odd rows, and slate-50 for even rows -->
+                            <tr class="odd:bg-white even:bg-slate-50 ">
+                                <td class="border border-slate-300 text-center"><?= $alumnos["id"] ?></td>
+                                <td class="border border-slate-300 text-center"><?= $alumnos["dni"] ?></td>
+                                <td class="border border-slate-300 text-center"><?= $alumnos["nombres"] ?></td>
+                                <td class="border border-slate-300 text-center"><?= $alumnos["apellidos"] ?></td>
+                                <td class="border border-slate-300 text-center"><?= $alumnos["email"] ?></td>
+                                <td class="border border-slate-300 text-center"><?= $alumnos["direccion"] ?></td>
+                                <td class="border border-slate-300 text-center"><?= $alumnos["nacimiento"] ?></td>
+                                <td class="border border-slate-300 text-center">
+                                    <a href="/eliminar">Eliminar</a> 
+                                    <a href="Editar">Editar</a>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
     </main>
 </body>
 

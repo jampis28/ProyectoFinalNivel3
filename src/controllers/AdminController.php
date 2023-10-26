@@ -14,7 +14,7 @@ class AdminController
             default:
                 echo "No se encontro ese ruta";
                 break;
-        }    
+        }
     }
     public function maestro()
     {
@@ -26,14 +26,16 @@ class AdminController
             default:
                 echo "No se encontro ese ruta";
                 break;
-        }    
+        }
     }
     public function alumno()
     {
         session_start();
         switch ($_SESSION["user"]["rol_id"]) {
             case 1:
+                $data = $this->all(3);
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/alumnos.php";
+
                 break;
             case 2:
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
@@ -42,7 +44,7 @@ class AdminController
             default:
                 echo "No se encontro ese ruta";
                 break;
-        }    
+        }
     }
     public function clase()
     {
@@ -58,7 +60,7 @@ class AdminController
             default:
                 echo "No se encontro ese ruta";
                 break;
-        } 
+        }
     }
     public function log_out()
     {
@@ -68,5 +70,16 @@ class AdminController
 
 
     //Realizar los CRUD
+    public function all($rol_id)
+    {
+        $res = Users::all($rol_id);
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+       return $data;
+    } 
 
+    public function registrarlo($request)
+    {
+        $data = Users::register($request);
+            $this->alumno();
+    } 
 }
