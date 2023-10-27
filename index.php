@@ -33,6 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $controller2->alumnoedit($_GET["id"]);
             break;
 
+        case "/maestroedit":
+            $controller2->maestroedit($_GET["id"]);
+            break;
+
         case "/clases":
             $controller2->clase();
             break;

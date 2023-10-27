@@ -21,10 +21,30 @@ class AdminController
         session_start();
         switch ($_SESSION["user"]["rol_id"]) {
             case 1:
-                $data = $this->all(2);
+                $data = $this->allmaestro();
                 $clases =  $this->allclases();
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/maestros.php";
                 break;
+            default:
+                echo "No se encontro ese ruta";
+                break;
+        }
+    }
+
+    public function maestroedit($id)
+    {
+        session_start();
+        switch ($_SESSION["user"]["rol_id"]) {
+            case 1:
+                $data = $this->allmaestro();
+                $clases =  $this->allclases();
+                $datauser = $this->editarmaestro($id);
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/maestros/edit.php";
+                break;
+            case 2:
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
+                break;
+
             default:
                 echo "No se encontro ese ruta";
                 break;
@@ -127,6 +147,13 @@ class AdminController
         return $data;
     }
 
+    public function allmaestro()
+    {
+        $res = Users::allmaestro();
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
     public function registrarlomaestro($request)
     {
         $data = Users::registermaestro($request);
@@ -135,14 +162,14 @@ class AdminController
 
     public function editarmaestro($id_usuario)
     {
-        $res = Users::edit($id_usuario);
+        $res = Users::editmaestro($id_usuario);
         $datauser = $res->fetch(PDO::FETCH_ASSOC);
         return $datauser;
     }
 
     public function deletemaestro($id)
     {
-        $deleted = Users::delete($id);
+        $deleted = Users::deletemaestro($id);
         header("Location: /maestros");
     }
 }

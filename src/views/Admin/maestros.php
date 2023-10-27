@@ -158,7 +158,7 @@ if (!isset($_SESSION["user"])) {
                 </div>
                 <div class="w-[1150px] h-[50px] flex justify-between items-center border-2 border-[#a9b0b9] p-2 text-[12px] bg-white ml-6">
                     <p>Informacion de Maestro</p>
-                    <button id="open-modal" class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-8">Agregar Maestro</button>
+                    <button id="open-modalmaestro" class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-8">Agregar Maestro</button>
                 </div>
             </div>
 
@@ -168,7 +168,7 @@ if (!isset($_SESSION["user"])) {
 
                 <!-- Modal oculto -->
 
-                <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+                <div id="modalmaestro" class="fixed inset-0 z-50 flex items-center justify-center hidden">
                     <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
                     <div class="modal-container bg-white w-[400px] h-[600px] md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -177,59 +177,60 @@ if (!isset($_SESSION["user"])) {
                             <div class="flex justify-between items-center pb-3 mb-3  border-b border-[#a9b0b9]">
                                 <p class="text-2xl font-bold mx-4">Agregar Maestro</p>
                             </div>
-                            <form class="flex flex-col gap-1" action="/maestro" method="post">
+                            <form class="flex flex-col gap-2" action="/maestro" method="post">
+                                <div class="flex flex-col justify-center items-start pl-4 mb-2">
+                                    <label for="">Clase Asignada</label>
+                                    <select type="text" id="input-group-1" class=" mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex w-[370px] h-[10px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="clase_id">
+                                        <?php
+                                        foreach ($clases as $clase) {
+                                        ?>
+                                            <option class="w-[370px] rounded-md flex mb-2" value="<?= $clase["id"] ?>"><?= $clase["nombre"] ?></option>
+                                        <?php
+                                        };
+                                        ?>
+                                </div>
                                 <div class="flex flex-col justify-center items-start pl-4">
                                     <label for="">Correo Electronico</label>
-                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[30px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa email" name="email">
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa email" name="email">
                                 </div>
                                 <div class="flex flex-col justify-center items-start pl-4">
                                     <label for="">Contraseña</label>
-                                    <input type="password" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[30px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa Password" name="contrasena">
+                                    <input type="password" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa Password" name="contrasena">
                                 </div>
 
                                 <div class="flex flex-col justify-center items-start pl-4">
                                     <label for="">Nombre(s)</label>
-                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[30px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa nombre(s)" name="nombres">
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa nombre(s)" name="nombres">
                                 </div>
                                 <div class="flex flex-col justify-center items-start pl-4">
                                     <label for="">Apellido(s)</label>
-                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[30px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa apellido(s)" name="apellidos">
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa apellido(s)" name="apellidos">
                                 </div>
                                 <div class="flex flex-col justify-center items-start pl-4">
                                     <label for="">Dirección</label>
-                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[30px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa direccion" name="direccion">
+                                    <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingresa direccion" name="direccion">
                                 </div>
                                 <div class="flex flex-col justify-center items-start pl-4">
                                     <label for="">Fecha de nacimiento</label>
-                                    <input type="date" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[30px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="nacimiento">
+                                    <input type="date" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="nacimiento">
                                     <input type="hidden" name="rol_id" value="2">
                                 </div>
-                                <div class="flex flex-col justify-center items-start pl-4">
-                                    <label for="">Clase Asignada</label>
-                                    <select type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[39px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="clase_id">
-                                        <?php
-                                        foreach ($clases as $clase) {
-                                        ?>
-                                            <option class="w-[370px] rounded-md" value="<?= $clase["id"] ?>"><?= $clase["nombre"] ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                </div>
+
                                 <div class="flex justify-end items-center pl-4 mt-[8px]">
                                     <button type="submit" class="w-[150px] text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Guardar Cambios</button>
                                 </div>
                             </form>
                             <div class="absolute top-[539px] ml-6">
-                                <button id="close-modal" class="w-[150px] text-white bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 close-modal">Close</button>
+                                <button id="close-modalmaestro" class="w-[150px] text-white bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 close-modal">Close</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <script>
-                const openModalButton = document.getElementById("open-modal");
-                const modal = document.getElementById("modal");
-                const closeModalButton = document.getElementById("close-modal");
+                const openModalButton = document.getElementById("open-modalmaestro");
+                const modal = document.getElementById("modalmaestro");
+                const closeModalButton = document.getElementById("close-modalmaestro");
 
                 openModalButton.addEventListener("click", () => {
                     modal.classList.remove("hidden");
@@ -257,27 +258,28 @@ if (!isset($_SESSION["user"])) {
                         ?>
                             <!-- Use a white background for odd rows, and slate-50 for even rows -->
                             <tr class="odd:bg-white even:bg-slate-50 ">
-                                <td class="border border-slate-300 text-center"><?= $alumnos["id"] ?></td>
+                                <td class="border border-slate-300 text-center"><?= $alumnos["maestro_id"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["nombres"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["apellidos"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["email"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["direccion"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["nacimiento"] ?></td>
-                                <td class="border border-slate-300 text-center"><?= $clase["nombre"] ?></td>
-                                <td class="border border-slate-300 text-center flex w-[90px] h-[70px] items-center">
-                                    <a class="w-[20px] ml-3 mr-3" href="/alumnosedit?id=<?= $alumnos["id"] ?>">
-                                        <svg class="fill-[#4896a2] w-[20px]" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                            <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
+                                <td class="border border-slate-300 text-center"><?= $alumnos["nombre_clase"] ?></td>
+
+                            <td class="border border-slate-300 text-center flex w-[90px] h-[70px] items-center">
+                                <a class="w-[20px] ml-3 mr-3" href="/maestroedit?id=<?= $alumnos["maestro_id"] ?>">
+                                    <svg class="fill-[#4896a2] w-[20px]" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
+                                    </svg>
+                                </a>
+                                <form action="/deletemaestro" method="post">
+                                    <button type="submit" name="alumno_id" value="<?= $alumnos["maestro_id"] ?>">
+                                        <svg class="fill-[#da1616]" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                            <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                                         </svg>
-                                    </a>
-                                    <form action="/deletemaestro" method="post">
-                                        <button type="submit" name="alumno_id" value="<?= $alumnos["id"] ?>">
-                                            <svg class="fill-[#da1616]" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </td>
+                                    </button>
+                                </form>
+                            </td>
                             </tr>
                         <?php
                         }
