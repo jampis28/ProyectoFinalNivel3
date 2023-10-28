@@ -16,6 +16,7 @@ class AdminController
                 break;
         }
     }
+
     public function maestro()
     {
         session_start();
@@ -31,25 +32,6 @@ class AdminController
         }
     }
 
-    public function maestroedit($id)
-    {
-        session_start();
-        switch ($_SESSION["user"]["rol_id"]) {
-            case 1:
-                $data = $this->allmaestro();
-                $clases =  $this->allclases();
-                $datauser = $this->editarmaestro($id);
-                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/maestros/edit.php";
-                break;
-            case 2:
-                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
-                break;
-
-            default:
-                echo "No se encontro ese ruta";
-                break;
-        }
-    }
     public function alumno()
     {
         session_start();
@@ -68,6 +50,30 @@ class AdminController
                 break;
         }
     }
+
+    public function clase()
+    {
+        session_start();
+        switch ($_SESSION["user"]["rol_id"]) {
+            case 1:
+                $data =  $this->allclase();
+                $maestros = $this->all(2);
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/clases.php";
+                break;
+            case 3:
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/clases.php";
+                break;
+
+            default:
+                echo "No se encontro ese ruta";
+                break;
+        }
+    }
+
+
+    /*                   VISTA PARA EDITAR ES MODAL             */
+
+    // VISTA ALUMNO EDITAR
 
     public function alumnoedit($id)
     {
@@ -88,15 +94,20 @@ class AdminController
         }
     }
 
-    public function clase()
+    // VISTA MAESTRO EDITAR
+
+    public function maestroedit($id)
     {
         session_start();
         switch ($_SESSION["user"]["rol_id"]) {
             case 1:
-                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/clases.php";
+                $data = $this->allmaestro();
+                $clases =  $this->allclases();
+                $datauser = $this->editarmaestro($id);
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/maestros/edit.php";
                 break;
-            case 3:
-                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/clases.php";
+            case 2:
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
                 break;
 
             default:
@@ -104,14 +115,34 @@ class AdminController
                 break;
         }
     }
-    public function log_out()
+
+    // VISTA CLASE EDITAR
+
+    public function claseedit($id)
     {
-        include $_SERVER["DOCUMENT_ROOT"] . "/src/views/log_out.php";
+        session_start();
+        switch ($_SESSION["user"]["rol_id"]) {
+            case 1:
+                $data =  $this->allclase();
+                $maestros = $this->all(2);
+                $claseid = $this->editarclase($id);
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/clases/edit.php";
+                break;
+            case 2:
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
+                break;
+
+            default:
+                echo "No se encontro ese ruta";
+                break;
+        }
     }
 
+    /*                 HACIENDO CRUD DE CUENTA ADMIN           */
 
 
     //Realizar los CRUD ALUMNOS
+
     public function all($rol_id)
     {
         $res = Users::all($rol_id);
@@ -125,11 +156,17 @@ class AdminController
         $this->alumno();
     }
 
-    public function editar($id_usuario)
+    public function editar($request)
     {
-        $res = Users::edit($id_usuario);
+        $res = Users::edit($request);
         $datauser = $res->fetch(PDO::FETCH_ASSOC);
         return $datauser;
+    }
+
+    public function editaralumno($request)
+    {
+        Users::editaralumno($request);
+        $this->alumno();
     }
 
     public function delete($id)
@@ -140,6 +177,7 @@ class AdminController
 
 
     //Realizar los CRUD mAESTRO
+
     public function allclases()
     {
         $res = Users::allclase();
@@ -160,16 +198,64 @@ class AdminController
         $this->maestro();
     }
 
-    public function editarmaestro($id_usuario)
+    public function editarmaestro($request)
     {
-        $res = Users::editmaestro($id_usuario);
+        $res = Users::editmaestro($request);
         $datauser = $res->fetch(PDO::FETCH_ASSOC);
         return $datauser;
+    }
+
+    public function editandomaestro($request)
+    {
+        Users::editarmaestro($request);
+        $this->maestro();
     }
 
     public function deletemaestro($id)
     {
         $deleted = Users::deletemaestro($id);
         header("Location: /maestros");
+    }
+
+
+    //Realizar los CRUD CLASES
+
+    public function allclase()
+    {
+        $res = Users::allclases();
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function registrarloclase($request)
+    {
+        $data = Users::registerclase($request);
+        $this->clase();
+    }
+
+    public function editarclase($request)
+    {
+        $res = Users::editclase($request);
+        $datauser = $res->fetch(PDO::FETCH_ASSOC);
+        return $datauser;
+    }
+
+    public function editandoclase($request)
+    {
+        Users::editarclase($request);
+        $this->clase();
+    }
+
+    public function deleteclase($id)
+    {
+        $deleted = Users::deleteclases($id);
+        header("Location: /clases");
+    }
+
+    //LOG_OUT
+
+    public function log_out()
+    {
+        include $_SERVER["DOCUMENT_ROOT"] . "/src/views/log_out.php";
     }
 }

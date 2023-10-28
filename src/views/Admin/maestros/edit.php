@@ -242,7 +242,7 @@ if (!isset($_SESSION["user"])) {
 
 
             <div class="ml-6">
-                <table class="table-fixed selection:border-collapse border border-slate-400 w-[1100px]">
+                <table class="table-fixed selection:border-collapse border border-slate-400 w-[1100px] text-[12px]">
 
                     <th class="border border-slate-300 text-center w-11">#</th>
                     <th class="border border-slate-300 text-center">NOMBRE</th>
@@ -263,7 +263,7 @@ if (!isset($_SESSION["user"])) {
                                 <td class="border border-slate-300 text-center"><?= $alumnos["apellidos"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["email"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["direccion"] ?></td>
-                                <td class="border border-slate-300 text-center"><?= $alumnos["nacimiento"] ?></td>
+                                <td class="border border-slate-300 text-center "><?= $alumnos["nacimiento"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["nombre_clase"] ?></td>
 
                                 <td class="border border-slate-300 text-center flex w-[90px] h-[70px] items-center">
@@ -302,10 +302,10 @@ if (!isset($_SESSION["user"])) {
                             <div class="flex justify-between items-center pb-3 mb-3  border-b border-[#a9b0b9]">
                                 <p class="text-2xl font-bold mx-4">Editar Maestro</p>
                             </div>
-                            <form class="flex flex-col gap-2" action="/maestro" method="post">
-                                <div class="flex flex-col justify-center items-start pl-4 h-[20px]">
+                            <form class="flex flex-col gap-4" action="/maestroedit" method="post">
+                                <div class="flex flex-col justify-center items-start pl-4 h-[39px] mt-9">
                                     <label for="">Clase Asignada</label>
-                                    <select type="text" id="input-group-1" class=" mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[10px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="clase_id">
+                                    <select type="text" id="input-group-1" class=" mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[39px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="clase_id">
                                         <?php
                                         foreach ($clases as $clase) {
                                         ?>
@@ -314,11 +314,11 @@ if (!isset($_SESSION["user"])) {
                                         };
                                         ?>
                                 </div>
-                                <div class="flex flex-col justify-center items-start pl-4">
+                                <div class="flex flex-col justify-center items-start pl-4 ">
                                     <label for="">Correo Electronico</label>
                                     <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $datauser["email"] ?>" name="email">
                                 </div>
-                                <div class="flex flex-col justify-center items-start pl-4">
+                                <div class="flex flex-col justify-center items-start pl-4 mt-9">
                                     <label for="">Contraseña</label>
                                     <input type="password" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="******" name="contrasena">
                                 </div>
@@ -339,6 +339,7 @@ if (!isset($_SESSION["user"])) {
                                     <label for="">Fecha de nacimiento</label>
                                     <input type="date" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $datauser["nacimiento"] ?>" name="nacimiento">
                                     <input type="hidden" name="rol_id" value="2">
+                                    <input type="hidden" name="id" value="<?= $datauser["maestro_id"] ?>">
                                 </div>
 
                                 <div class="flex justify-end items-center pl-4 mt-[8px]">

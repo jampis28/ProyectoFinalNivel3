@@ -41,6 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $controller2->clase();
             break;
 
+        case "/claseedit":
+            $controller2->claseedit($_GET["id"]);
+            break;
+
         case "/log_out":
             $controller2->log_out();
             break;
@@ -61,17 +65,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $controller2->registrarlo($_POST);
             break;
 
+        case "/alumnosedit":
+            $controller2->editaralumno($_POST);
+            break;
+
         case "/maestro":
             $controller2->registrarlomaestro($_POST);
             break;
 
+        case "/maestroedit":
+            $controller2->editandomaestro($_POST);
+            break;
+
+        case "/clase":
+            $controller2->registrarloclase($_POST);
+            break;
+
+        case "/claseedit":
+            $controller2->editandoclase($_POST);
+            break;
 
         case "/delete":
             $controller2->delete($_POST["alumno_id"]);
             break;
 
         case "/deletemaestro":
-            $controller2->deletemaestro($_POST["alumno_id"]);
+            $controller2->deletemaestro($_POST["maestro_id"]);
+            break;
+
+        case "/deleteclase":
+            $controller2->deleteclase($_POST["clase_id"]);
             break;
 
 
