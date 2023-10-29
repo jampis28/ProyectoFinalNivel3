@@ -303,7 +303,7 @@ if (!isset($_SESSION["user"])) {
                                 <p class="text-2xl font-bold mx-4">Editar Maestro</p>
                             </div>
                             <form class="flex flex-col gap-4" action="/maestroedit" method="post">
-                                <div class="flex flex-col justify-center items-start pl-4 h-[39px] mt-9">
+                                <div class="flex flex-col justify-center items-start pl-4 h-[45px] mt-9">
                                     <label for="">Clase Asignada</label>
                                     <select type="text" id="input-group-1" class=" mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[39px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="clase_id">
                                         <?php

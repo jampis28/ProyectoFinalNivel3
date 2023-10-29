@@ -71,6 +71,17 @@ class Users
         return $res;
     }
 
+    // TRAE DE LA TABLA USUARIOS EL ID Y EMAIL Y ACTIVE CON EL NOMBRE DEL ROL 
+
+    public static function allpermiso()
+    {
+        $queryString = "call usuariopermiso();";
+
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
 
 
 
@@ -82,11 +93,11 @@ class Users
     {
         try {
             extract($data);
-            if (isset($dni, $email, $contrasena, $nombres, $apellidos, $direccion, $nacimiento) && $dni !== "" && $email !== "" && $contrasena !== "" && $nombres !== "" && $apellidos !== "" && $direccion !== "" && $nacimiento !== "") {
+            if (isset($dni, $email, $contrasena, $nombres, $apellidos, $direccion, $nacimiento, $active) && $dni !== "" && $email !== "" && $contrasena !== "" && $nombres !== "" && $apellidos !== "" && $direccion !== "" && $nacimiento !== "" && $active !== "") {
                 $hash = password_hash($contrasena, PASSWORD_DEFAULT);
                 $queryString = "INSERT INTO university.usuarios
-            (dni, nombres, apellidos, email, contrasena, direccion, nacimiento, rol_id)
-            VALUES('$dni', '$nombres', '$apellidos', '$email', '$hash', '$direccion', '$nacimiento', '$rol_id');";
+            (dni, nombres, apellidos, email, contrasena, direccion, nacimiento, rol_id, active)
+            VALUES('$dni', '$nombres', '$apellidos', '$email', '$hash', '$direccion', '$nacimiento', '$rol_id','$active');";
 
                 $res = DB::query($queryString);
             }
@@ -103,11 +114,11 @@ class Users
     {
         try {
             extract($data);
-            if (isset($email, $contrasena, $nombres, $apellidos, $direccion, $nacimiento)  && $email !== "" && $contrasena !== "" && $nombres !== "" && $apellidos !== "" && $direccion !== "" && $nacimiento !== "") {
+            if (isset($email, $contrasena, $nombres, $apellidos, $direccion, $nacimiento, $active)  && $email !== "" && $contrasena !== "" && $nombres !== "" && $apellidos !== "" && $direccion !== "" && $nacimiento !== "" && $active !== "") {
                 $hash = password_hash($contrasena, PASSWORD_DEFAULT);
                 $queryString = "INSERT INTO university.usuarios
-                (nombres, apellidos, email, contrasena, direccion, nacimiento, rol_id)
-                VALUES('$nombres', '$apellidos', '$email', '$hash', '$direccion', '$nacimiento', '$rol_id');";
+                (nombres, apellidos, email, contrasena, direccion, nacimiento, rol_id, active)
+                VALUES('$nombres', '$apellidos', '$email', '$hash', '$direccion', '$nacimiento', '$rol_id', '$active');";
 
                 $res = DB::query($queryString);
 

@@ -9,6 +9,7 @@ class AdminController
         session_start();
         switch ($_SESSION["user"]["rol_id"]) {
             case 1:
+                $data = $this->allpermisos();
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/permisos.php";
                 break;
             default:
@@ -250,6 +251,16 @@ class AdminController
     {
         $deleted = Users::deleteclases($id);
         header("Location: /clases");
+    }
+
+
+    //Realizar los CRUD CLASES
+
+    public function allpermisos()
+    {
+        $res = Users::allpermiso();
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
 
     //LOG_OUT

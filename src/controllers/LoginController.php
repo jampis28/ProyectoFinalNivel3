@@ -16,24 +16,39 @@ class LoginController
     {
         $data = Users::logearse($request);
         if ($data) {
-                switch ($_SESSION["user"]["rol_id"]) {
-                    case 1:
+            switch ($_SESSION["user"]["rol_id"]) {
+                case 1:
+                    if ($_SESSION["user"]["active"] === 1) {
                         include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/dashboard.php";
-                        break;
-                    case 2:
+                    } else {
+                        echo
+                        header("Location: /index.php");
+                    }
+                    break;
+                case 2:
+                    if ($_SESSION["user"]["active"] === 1) {
                         include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/dashboard.php";
-                        break;
-                    case 3:
+                    } else {
+                        echo
+                        header("Location: /index.php");
+                    }
+                    break;
+                case 3:
+                    if ($_SESSION["user"]["active"] === 1) {
                         include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/dashboard.php";
-                        break;
+                    } else {
+                        echo
+                        header("Location: /index.php");
+                    }
+                    break;
 
-                    default:
-                        echo "No se encontro ese rol";
-                        break;
-                }
-        }else {
+                default:
+                    echo "No se encontro ese rol";
+                    break;
+            }
+        } else {
             echo "Contraseña Incorrecta";
             header("Location: /index.php");
-       }
+        }
     }
 }
