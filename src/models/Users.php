@@ -16,7 +16,7 @@ class Users
 
             $data = $res->fetch(PDO::FETCH_ASSOC);
 
-            password_verify($contrasena, $data["contrasena"]) === false && throw new Exception("No existe el Registro");
+            password_verify($contrasena, $data["contrasena"]) === false && throw new Exception("Usuario y/o Contraseña Equivocada" . header("Location: /index.php"));
 
             session_start();
             return ($_SESSION["user"] = $data);
@@ -298,7 +298,7 @@ class Users
         }
     }
 
-    
+
     // EDITAR PERMISOS
 
     public static function editpermiso($id)
@@ -374,13 +374,46 @@ class Users
 
 
 
+    /*-------------------------------------CRUD DE USUARIOS ALUMNOS---------------------------*/
 
-    // CERRAR SESSION
 
-    public static function logout()
+    public static function allmateriaalumno($id)
     {
-        session_start();
-        session_destroy();
-        header("Location: /index.php");
+        $queryString = "call materiasdealumnosporid('$id');";
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
+    public static function alumnosclases($data)
+    {
+        try {
+            $alumno_id = $data["alumno_id"];
+
+            for ($i = 0; $i < count($data["clases"]); $i++) {
+                $clase_id = $data["clases"][$i];
+                if (isset($alumno_id, $clase_id)  && $alumno_id !== "" && $clase_id !== "") {
+                    $queryString = "INSERT INTO university.alumnos_clases
+                    (alumno_id, clase_id)
+                    VALUES('$alumno_id', '$clase_id');";
+                    $res = DB::query($queryString);
+                }
+            }
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    // BORRAR ALUMNOS CLASES 
+
+    public static function deletealumnosclases($id)
+    {
+        $res = DB::query("DELETE FROM alumnos_clases WHERE clase_id = '$id';");
+
+        if ($res) {
+            return true;
+        }
     }
 }

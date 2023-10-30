@@ -69,6 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $controller2->registrarlo($_POST);
             break;
 
+        case "/alumnosclases":
+            $controller2->alumnosclases($_POST);
+            break;
+
         case "/alumnosedit":
             $controller2->editaralumno($_POST);
             break;
@@ -103,6 +107,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         case "/deleteclase":
             $controller2->deleteclase($_POST["clase_id"]);
+            break;
+
+        case "/deletealumnoclases":
+            $controller2->deletealumnosclases($_POST["alumnoclase_id"]);
             break;
 
 

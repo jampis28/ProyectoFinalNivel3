@@ -17,7 +17,7 @@ if (!isset($_SESSION["user"])) {
 
 <body>
     <main class="h-screen flex ">
-    <div class="w-[250px] bg-[#353a40]">
+    <div class="w-[20%] bg-[#353a40]">
             <div class=" flex justify-start items-center  border-b-2 border-[#b1acbd] h-[60px]">
                 <div class="flex ml-5 justify-center items-center rounded-3xl ">
                     <img class="flex object-cover h-[50px] w-[50px] rounded-3xl" src="/src/assets/logo.jpg" alt="Logo">
@@ -50,7 +50,7 @@ if (!isset($_SESSION["user"])) {
         </div>
 
 
-        <div class="bg-[#f5f6fa]">
+        <div class="bg-[#f5f6fa] w-[85%]">
 
             <nav class="bg-[#ffffff] border-2 border-[#a9b0b9]">
                 <div class="mx-auto w-[1150px] h-[60px] px-2 sm:px-6 lg:px-8">

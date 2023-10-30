@@ -62,6 +62,8 @@ class AdminController
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/clases.php";
                 break;
             case 3:
+                $clases =  $this->allclase();
+                $materias = $this->allmateriaalumnos($_SESSION["user"]["id"]);
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/clases.php";
                 break;
 
@@ -303,10 +305,38 @@ class AdminController
         Users::editarpermiso($request);
         $this->permiso();
     }
+
+/*                 HACIENDO CRUD DE CUENTA ALUMNO           */
+
+    /*-------------------------------------USUARIO ALUMNO----------------------------*/
+
+    public function allmateriaalumnos($id)
+    {
+        $res = Users::allmateriaalumno($id);
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+
+    public function alumnosclases($request)
+    {
+        $data = Users::alumnosclases($request);
+        $this->clase();
+    }
+
+    public function deletealumnosclases($id)
+    {
+        $deleted = Users::deletealumnosclases($id);
+        $this->clase();
+    }
+    
+
+
     //LOG_OUT
 
     public function log_out()
     {
         include $_SERVER["DOCUMENT_ROOT"] . "/src/views/log_out.php";
     }
+
 }
