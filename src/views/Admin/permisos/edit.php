@@ -223,44 +223,42 @@ if (!isset($_SESSION["user"])) {
             <div id="modalmaestro2" class="fixed inset-0 z-50 flex items-center justify-center">
                 <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
-                <div class="modal-container bg-white w-[400px] h-[600px] md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                <div class="modal-container bg-white w-[400px] h-[400px] md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
                     <!-- Contenido del modal -->
                     <div class="modal-content py-4 text-left ">
                         <div class="flex justify-between items-center pb-3 mb-3  border-b border-[#a9b0b9]">
-                            <p class="text-2xl font-bold mx-4">Editar Maestro</p>
+                            <p class="text-2xl font-bold mx-4">Editar Permiso</p>
                         </div>
-                        <form class="flex flex-col gap-4" action="/maestroedit" method="post">
+                        <form class="flex flex-col gap-4" action="/permisoedit" method="post">
                             <div class="flex flex-col justify-center items-start pl-4 h-[45px] mt-9">
-                                <label for="">Clase Asignada</label>
-                                <select type="text" id="input-group-1" class=" mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[39px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="clase_id">
+                                <label for="">Rol de Usuario</label>
+                                <select type="text" id="input-group-1" class=" mb-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[39px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="rol_id">
                                     <?php
-                                    foreach ($clases as $clase) {
+                                    foreach ($roles as $rol) {
                                     ?>
-                                        <option class="w-[370px] h-[10px] rounded-md" value="<?= $clase["id"] ?>"><?= $clase["nombre"] ?></option>
+                                        <option class="w-[370px] h-[10px] rounded-md" value="<?= $rol["id"] ?>" <?= $rol["id"] === $claseid["role_id"] ? 'selected': "" ?>><?= $rol["nombre"] ?></option>
                                     <?php
                                     };
                                     ?>
+                                </select>
                             </div>
-                            <div class="flex flex-col justify-center items-start pl-4 ">
+                            <div class="flex flex-col justify-center items-start pl-4">
                                 <label for="">Email del Usuario</label>
-                                <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $permiso["email"] ?>" name="email">
-                            </div>
-                            <div class="flex flex-col justify-center items-start pl-4 mt-9">
-                                <label for="">Rol de Usuario</label>
-                                <input type="password" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $permiso["email"] ?>" name="nombre">
+                                <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $claseid["email"] ?>" name="email">
                             </div>
 
-                            <div class="flex flex-col justify-center items-start pl-4">
+                            <div class="flex flex-col justify-center items-start pl-4 ">
                                 <label for="">Usuario Active</label>
-                                <input type="checked" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[370px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $datauser["nombres"] ?>" name="nombres">
+                                <input type="checkbox" id="input-group-1" class="bg-gray-50 border ml-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[32px] h-[32px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" <?= $claseid["active"]  === 1 ? "checked" : "" ?> value="1" name="switch"> 
+                                <input type="hidden" name="id" value="<?= $claseid["id"] ?>"> 
                             </div>
 
                             <div class="flex justify-end items-center pl-4 mt-[8px]">
                                 <button type="submit" class="w-[150px] text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Guardar Cambios</button>
                             </div>
                         </form>
-                        <div class="absolute top-[539px] ml-6">
-                            <a href="/maestros">
+                        <div class="absolute top-[433px] ml-6">
+                            <a href="/permisos">
                                 <button id="close-modalmaestro2" class="w-[150px] text-white bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 close-modal">Close</button>
                             </a>
                         </div>

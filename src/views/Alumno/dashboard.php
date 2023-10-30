@@ -15,8 +15,8 @@ if (!isset($_SESSION["user"])) {
 </head>
 
 <body>
-    <main class="h-screen flex ">
-        <div class="w-[250px] bg-[#353a40]">
+    <main class="h-screen flex  ">
+        <div class="bg-[#353a40] w-[20%]">
             <div class=" flex justify-start items-center  border-b-2 border-[#b1acbd] h-[60px]">
                 <div class="flex ml-5 justify-center items-center rounded-3xl ">
                     <img class="flex object-cover h-[50px] w-[50px] rounded-3xl" src="/src/assets/logo.jpg" alt="Logo">
@@ -25,8 +25,8 @@ if (!isset($_SESSION["user"])) {
             </div>
 
             <div class="flex flex-col items-start justify-center h-[90px] border-b-2 border-[#b1acbd]">
-                <h2 class="ml-5 text-[20px]  text-[#a9b0b9] font-medium">Alumno</h2>
-                <span class="ml-5 text-[14px]  text-[#a9b0b9] font-medium">alumno alumno</span>
+                <h2 class="ml-5 text-[20px]  text-[#a9b0b9] font-medium"><?=$_SESSION["user"]["nombre"]?></h2>
+                <span class="ml-5 text-[14px]  text-[#a9b0b9] font-medium"><?=$_SESSION["user"]["nombres"]?> <?=$_SESSION["user"]["apellidos"]?></span>
             </div>
             <div class="flex flex-col justify-center items-start gap-4">
                 <div class="mt-4">
@@ -62,7 +62,7 @@ if (!isset($_SESSION["user"])) {
         </div>
 
 
-        <div class="bg-[#f5f6fa]">
+        <div class="bg-[#f5f6fa] w-[85%]">
 
             <nav class="bg-[#ffffff] border-2 border-[#a9b0b9]">
                 <div class="mx-auto w-[1150px] h-[60px] px-2 sm:px-6 lg:px-8">
@@ -77,7 +77,7 @@ if (!isset($_SESSION["user"])) {
                             <div class="">
                                 <!-- Navigation Menu Button -->
                                 <button id="menu-button" class="p-2 text-[#a9b0b9]">
-                                    alumno alumno
+                                <?=$_SESSION["user"]["nombres"]?> <?=$_SESSION["user"]["apellidos"]?>
                                 </button>
                                 <!-- Hidden Menu -->
                                 <div id="hidden-menu" class="hidden bg-white absolute right-1 top-14 mt-2 w-35 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">

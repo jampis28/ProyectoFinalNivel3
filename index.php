@@ -45,6 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $controller2->claseedit($_GET["id"]);
             break;
 
+        case "/permisoedit":
+            $controller2->permisoedit($_GET["id"]);
+            break;
+
         case "/log_out":
             $controller2->log_out();
             break;
@@ -83,6 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         case "/claseedit":
             $controller2->editandoclase($_POST);
+            break;
+
+        case "/permisoedit":
+            $controller2->editandopermiso($_POST);
             break;
 
         case "/delete":

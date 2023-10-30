@@ -139,6 +139,28 @@ class AdminController
         }
     }
 
+    // VISTA PERMISO EDITAR
+
+    public function permisoedit($id)
+    {
+        session_start();
+        switch ($_SESSION["user"]["rol_id"]) {
+            case 1:
+                $data = $this->allpermisos();
+                $roles = $this->allroles();
+                $claseid = $this->editarpermiso($id);
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/permisos/edit.php";
+                break;
+            case 2:
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
+                break;
+
+            default:
+                echo "No se encontro ese ruta";
+                break;
+        }
+    }
+
     /*                 HACIENDO CRUD DE CUENTA ADMIN           */
 
 
@@ -254,7 +276,7 @@ class AdminController
     }
 
 
-    //Realizar los CRUD CLASES
+    //Realizar los CRUD PERMISO
 
     public function allpermisos()
     {
@@ -262,7 +284,25 @@ class AdminController
         $data = $res->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+    public function allroles()
+    {
+        $res = Users::allroles();
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
 
+    public function editarpermiso($request)
+    {
+        $res = Users::editpermiso($request);
+        $datauser = $res->fetch(PDO::FETCH_ASSOC);
+        return $datauser;
+    }
+
+    public function editandopermiso($request)
+    {
+        Users::editarpermiso($request);
+        $this->permiso();
+    }
     //LOG_OUT
 
     public function log_out()

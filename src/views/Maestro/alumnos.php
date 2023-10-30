@@ -26,8 +26,8 @@ if (!isset($_SESSION["user"])) {
             </div>
 
             <div class="flex flex-col items-start justify-center h-[90px] border-b-2 border-[#b1acbd]">
-                <h2 class="ml-5 text-[20px]  text-[#a9b0b9] font-medium">Maestro</h2>
-                <span class="ml-5 text-[14px]  text-[#a9b0b9] font-medium">maestro maestro</span>
+                <h2 class="ml-5 text-[20px]  text-[#a9b0b9] font-medium"><?=$_SESSION["user"]["nombre"]?></h2>
+                <span class="ml-5 text-[14px]  text-[#a9b0b9] font-medium"><?=$_SESSION["user"]["nombres"]?> <?=$_SESSION["user"]["apellidos"]?></span>
             </div>
             <div class="flex flex-col justify-center items-start gap-4">
                 <div class="mt-4">
@@ -65,7 +65,7 @@ if (!isset($_SESSION["user"])) {
                             <div class="">
                                 <!-- Navigation Menu Button -->
                                 <button id="menu-button" class="p-2 text-[#a9b0b9]">
-                                    maestro maestro
+                                <?=$_SESSION["user"]["nombres"]?> <?=$_SESSION["user"]["apellidos"]?>
                                 </button>
                                 <!-- Hidden Menu -->
                                 <div id="hidden-menu" class="hidden bg-white absolute right-1 top-14 mt-2 w-35 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">

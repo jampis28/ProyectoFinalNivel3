@@ -29,8 +29,8 @@ if (!isset($_SESSION["user"])) {
             </div>
 
             <div class="flex flex-col items-start justify-center h-[90px] border-b-2 border-[#b1acbd]">
-                <h2 class="ml-5 text-[20px]  text-[#a9b0b9] font-medium">admin</h2>
-                <span class="ml-5 text-[14px]  text-[#a9b0b9] font-medium">Administrador</span>
+                <h2 class="ml-5 text-[20px]  text-[#a9b0b9] font-medium"><?= $_SESSION["user"]["nombre"] ?></h2>
+                <span class="ml-5 text-[14px]  text-[#a9b0b9] font-medium"><?= $_SESSION["user"]["nombres"] ?> <?= $_SESSION["user"]["apellidos"] ?></span>
             </div>
             <div class="flex flex-col justify-center items-start gap-4">
                 <div class="mt-4">
@@ -107,7 +107,7 @@ if (!isset($_SESSION["user"])) {
                             <div class="">
                                 <!-- Navigation Menu Button -->
                                 <button id="menu-button" class="p-2 text-[#a9b0b9]">
-                                    Administrador
+                                    <?= $_SESSION["user"]["nombres"] ?> <?= $_SESSION["user"]["apellidos"] ?>
                                 </button>
                                 <!-- Hidden Menu -->
                                 <div id="hidden-menu" class="hidden bg-white absolute right-1 top-14 mt-2 w-35 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
@@ -259,8 +259,8 @@ if (!isset($_SESSION["user"])) {
                                 <td class="border border-slate-300 text-center"><?= $alumnos["direccion"] ?></td>
                                 <td class="border border-slate-300 text-center"><?= $alumnos["nacimiento"] ?></td>
                                 <td class="border border-slate-300 text-center flex w-[90px] h-[70px] items-center">
-                                    <a class="w-[20px] ml-3 mr-3"  href="/alumnosedit?id=<?= $alumnos["id"] ?>">
-                                        <svg  class="fill-[#4896a2] w-[20px]" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <a class="w-[20px] ml-3 mr-3" href="/alumnosedit?id=<?= $alumnos["id"] ?>">
+                                        <svg class="fill-[#4896a2] w-[20px]" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                             <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
                                         </svg>
                                     </a>

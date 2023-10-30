@@ -8,7 +8,7 @@ class Users
         $email = $data["email"];
         $contrasena = $data["contrasena"];
         try {
-            $queryString = "SELECT * FROM usuarios WHERE email = '$email';";
+            $queryString = "call GetUsuarioInfoByEmail('$email');";
 
             $res = DB::query($queryString);
 
@@ -76,6 +76,15 @@ class Users
     public static function allpermiso()
     {
         $queryString = "call usuariopermiso();";
+
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
+    public static function allroles()
+    {
+        $queryString = "SELECT * FROM roles;";
 
         $res = DB::query($queryString);
 
@@ -289,6 +298,36 @@ class Users
         }
     }
 
+    
+    // EDITAR PERMISOS
+
+    public static function editpermiso($id)
+    {
+        $queryString = "call usuariopermisoid('$id');";
+
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
+    public static function editarpermiso($data)
+    {
+        try {
+            extract($data);
+            $switch_value = isset($_POST["switch"]) ? $_POST["switch"] : "0";
+            if (isset($rol_id, $email, $switch_value)  && $rol_id !== "" && $email !== "" && $switch_value !== "") {
+                $queryString = "UPDATE university.usuarios
+                SET rol_id='$rol_id', active='$switch_value', email='$email'  
+                WHERE id='$id';";
+
+                $res = DB::query($queryString);
+            }
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
 
 
     /*                ELIMINAR EN la Base de Datos              */
