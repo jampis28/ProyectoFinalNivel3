@@ -243,9 +243,9 @@ if (!isset($_SESSION["user"])) {
 
 
             <div class="ml-6">
-                <table class="table-fixed selection:border-collapse border border-slate-400 w-[1100px] text-[12px]">
+                <table class="  bg-slate-400 table-fixed selection:border-collapse border border-slate-400 w-[1100px] text-[12px]">
 
-                    <th class="border border-slate-300 text-center w-11">#</th>
+                    <th class="border border-slate-300 text-center w-11 h-[40px]">#</th>
                     <th class="border border-slate-300 text-center">NOMBRE</th>
                     <th class="border border-slate-300 text-center">APELLIDO</th>
                     <th class="border border-slate-300 text-center">CORREO</th>

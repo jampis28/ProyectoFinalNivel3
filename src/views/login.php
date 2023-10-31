@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <main class="h-screen flex justify-center items-center bg-[#fff5d2]">
+    <main class="h-screen flex justify-center items-center bg-[#fff5d2] bg-origin-content">
         <div class="w-[300px] h-screen flex flex-col justify-start items-center">
-            <div class="flex justify-center items-center">
-                <img class="w-[210px] h-[220px]" src="/src/assets/logo.jpg" alt="Logo">
+            <div class="  flex justify-center items-center mt-4 animate-bounce">
+                <img class="w-[210px] h-[220px] scale-100  border-0 border-b rounded" src="/src/assets/logo.jpg" alt="Logo">
             </div>
 
-            <div class=" bg-white w-[350px] h-[250px] border-4 border-black-900 flex flex-col justify-start items-center">
+            <div class=" shadow-2xl bg-white w-[350px] h-[250px] border-4 border-black-900 flex flex-col justify-start items-center">
                 <div class="mt-4 mb-4">
                     <h1>Bienvenido Ingresa con tu cuenta</h1>
                 </div>
@@ -44,7 +44,7 @@
                         <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[300px] pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" name="contrasena">
                     </div>
                     <div class="w-[100%] flex justify-end items-center">
-                        <button type="submit" class="w-[150px] text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Ingresar</button>
+                        <button type="submit" class=" transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 w-[150px] text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Ingresar</button>
                     </div>
                 </form>
             </div>

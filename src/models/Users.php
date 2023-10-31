@@ -410,10 +410,30 @@ class Users
 
     public static function deletealumnosclases($id)
     {
-        $res = DB::query("DELETE FROM alumnos_clases WHERE clase_id = '$id';");
+        $res = DB::query("DELETE FROM alumnos_clases WHERE id = '$id';");
 
         if ($res) {
             return true;
         }
     }
+
+ /*-------------------------------------CRUD DE USUARIOS MESTROS---------------------------*/
+
+    public static function allmateriasmaestros($id)
+    {
+        $queryString = "select * from clases c where c.id not in (select ac.clase_id  from alumnos_clases ac where ac.alumno_id ='$id');";
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
+    public static function allalumnosmaestros($id)
+    {
+        $queryString = "call alumnosinscritosporid('$id');";
+        $res = DB::query($queryString);
+
+        return $res;
+    }
+
+
 }

@@ -132,7 +132,7 @@ if (!isset($_SESSION["user"])) {
 
                         <div class="flex gap-[230px] ml-6">
                             <div class="w-[40%] ">
-                                <table class="table-fixed selection:border-collapse border border-slate-400 w-[600px] text-[12px] ">
+                                <table class=" bg-slate-400 table-fixed selection:border-collapse border border-slate-400 w-[600px] text-[12px] ">
 
                                     <th class="border border-slate-300 text-center w-11 h-9">#</th>
                                     <th class="border border-slate-300 text-center">Materia</th>
@@ -172,13 +172,15 @@ if (!isset($_SESSION["user"])) {
                             <form action="/alumnosclases" method="post">
                                 <select multiple id="countries_multiple" name="clases[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[250px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <?php foreach ($clases as $clase) { ?>
-                                            <option value="<?= $clase["clase_id"] ?>"><?= $clase["nombre_clase"] ?></option>
+                                            <option value="<?= $clase["id"] ?>"><?= $clase["nombre"] ?></option>
                                     <?php 
                                 };
                                 ?>
                                 </select>
                                 <input type="hidden" value="<?= $_SESSION["user"]["id"] ?> " name="alumno_id">
-                                <button type="submit">Inscribirse</button>
+                                <div class="flex justify-center items-center mt-2">
+                                <button type="submit" class="w-[150px] text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Inscribirse</button>
+                                </div>
                             </form>
 
                         </div>

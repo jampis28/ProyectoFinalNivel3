@@ -43,7 +43,14 @@ class AdminController
 
                 break;
             case 2:
+                $alumnosmateria = $this->allalumnosmaestros($_SESSION["user"]["id"]);
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Maestro/alumnos.php";
+                break;
+
+            case 3:
+                $clases =  $this->allmateriasmaestro($_SESSION["user"]["id"]);
+                $alumnosmaterias = $this->allmateriaalumnos($_SESSION["user"]["id"]);
+                include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/calificaciones.php";
                 break;
 
             default:
@@ -62,7 +69,7 @@ class AdminController
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Admin/clases.php";
                 break;
             case 3:
-                $clases =  $this->allclase();
+                $clases =  $this->allmateriasmaestro($_SESSION["user"]["id"]);
                 $materias = $this->allmateriaalumnos($_SESSION["user"]["id"]);
                 include $_SERVER["DOCUMENT_ROOT"] . "/src/views/Alumno/clases.php";
                 break;
@@ -306,7 +313,7 @@ class AdminController
         $this->permiso();
     }
 
-/*                 HACIENDO CRUD DE CUENTA ALUMNO           */
+    /*                 HACIENDO CRUD DE CUENTA ALUMNO           */
 
     /*-------------------------------------USUARIO ALUMNO----------------------------*/
 
@@ -329,14 +336,29 @@ class AdminController
         $deleted = Users::deletealumnosclases($id);
         $this->clase();
     }
-    
 
 
+    /*                 HACIENDO CRUD DE CUENTA MESTRO          */
+
+    /*-------------------------------------USUARIO MAESTRO----------------------------*/
+
+    public function allmateriasmaestro($request)
+    {
+        $res = Users::allmateriasmaestros($request);
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function allalumnosmaestros($id)
+    {
+        $res = Users::allalumnosmaestros($id);
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
     //LOG_OUT
 
     public function log_out()
     {
         include $_SERVER["DOCUMENT_ROOT"] . "/src/views/log_out.php";
     }
-
 }

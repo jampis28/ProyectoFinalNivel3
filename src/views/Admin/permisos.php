@@ -155,13 +155,17 @@ if (!isset($_SESSION["user"])) {
             </div>
 
             <div class="ml-6">
-                <table class="table-fixed selection:border-collapse border border-slate-400 w-[1100px] text-[12px]">
+                <table class=" bg-slate-400 table-fixed selection:border-collapse border border-slate-400 w-[1100px] text-[12px]">
+                    <thead class="">
+                        <tr>
+                            <th class="border border-slate-300 text-center w-11 h-[40px]">#</th>
+                            <th class="border border-slate-300 text-center">EMAIL/USUARIO</th>
+                            <th class="border border-slate-300 text-center">PERMISO</th>
+                            <th class="border border-slate-300 text-center">ESTADO</th>
+                            <th class="border border-slate-300 text-center w-[90px]">ACCIONES</th>
+                        </tr>
+                    </thead>
 
-                    <th class="border border-slate-300 text-center w-11">#</th>
-                    <th class="border border-slate-300 text-center">EMAIL/USUARIO</th>
-                    <th class="border border-slate-300 text-center">PERMISO</th>
-                    <th class="border border-slate-300 text-center">ESTADO</th>
-                    <th class="border border-slate-300 text-center w-[90px]">ACCIONES</th>
                     <tbody>
                         <?php
                         foreach ($data as $permiso) {
